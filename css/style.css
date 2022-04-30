@@ -144,3 +144,7 @@ footer h3{
     color: #232323;
     margin-top: 8px;
 }
+
+.selecionado{
+    border: solid 3px #404EED;
+}
