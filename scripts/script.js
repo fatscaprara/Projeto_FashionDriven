@@ -1,12 +1,7 @@
-let verificaModelo;
-let verificaGola;
-let verificaTecido;
+let verificaModelo, verificaGola, verificaTecido;
 let urlImage;
-let idInterval;
 let urlAPI = "https://mock-api.driven.com.br/api/v4/shirts-api/shirts";
-let modeloEscolhido;
-let golaEscolhida;
-let tecidoEscolhido;
+let modeloEscolhido, golaEscolhida, tecidoEscolhido;
 let encomendasRecentes;
 
 let nome = prompt("Qual é o seu nome?");
