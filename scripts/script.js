@@ -10,10 +10,10 @@ let tecidoEscolhido;
 
 let nome = prompt("Qual é o seu nome?");
 
-function selecionarModelo(modeloClicado){
+function selecionarModelo(modeloClicado) {
     let modeloSelecionado = document.querySelector(".secao-escolher-modelo .selecionado");
 
-    if(modeloSelecionado !== null){
+    if (modeloSelecionado !== null) {
         modeloSelecionado.classList.remove("selecionado");
     }
 
@@ -21,7 +21,7 @@ function selecionarModelo(modeloClicado){
 
     let elementoSelecionado = document.querySelector(".secao-escolher-modelo .selecionado");
 
-    if(elementoSelecionado !== null){
+    if (elementoSelecionado !== null) {
         verificaModelo = true;
     } else {
         verificaModelo = false;
@@ -31,10 +31,10 @@ function selecionarModelo(modeloClicado){
     console.log(modeloEscolhido);
 }
 
-function selecionarGola(golaClicada){
+function selecionarGola(golaClicada) {
     let golaSelecionada = document.querySelector(".secao-escolher-gola .selecionado");
 
-    if(golaSelecionada !== null){
+    if (golaSelecionada !== null) {
         golaSelecionada.classList.remove("selecionado");
     }
 
@@ -42,7 +42,7 @@ function selecionarGola(golaClicada){
 
     let elementoSelecionado = document.querySelector(".secao-escolher-gola .selecionado");
 
-    if(elementoSelecionado !== null){
+    if (elementoSelecionado !== null) {
         verificaGola = true;
     } else {
         verificaGola = false;
@@ -52,10 +52,10 @@ function selecionarGola(golaClicada){
     console.log(golaEscolhida);
 }
 
-function selecionarTecido(tecidoClicado){
+function selecionarTecido(tecidoClicado) {
     let tecidoSelecionado = document.querySelector(".secao-escolher-tecido .selecionado");
 
-    if(tecidoSelecionado !== null){
+    if (tecidoSelecionado !== null) {
         tecidoSelecionado.classList.remove("selecionado");
     }
 
@@ -63,7 +63,7 @@ function selecionarTecido(tecidoClicado){
 
     let elementoSelecionado = document.querySelector(".secao-escolher-tecido .selecionado");
 
-    if(elementoSelecionado !== null){
+    if (elementoSelecionado !== null) {
         verificaTecido = true;
     } else {
         verificaTecido = false;
@@ -73,10 +73,40 @@ function selecionarTecido(tecidoClicado){
     console.log(tecidoEscolhido);
 }
 
-function verificarPedido(){
+function translateModelo() {
+    if (modeloEscolhido === "T-shirt") {
+        modeloEscolhido = "t-shirt";
+    } else if (modeloEscolhido === "Manga longa") {
+        modeloEscolhido = "long";
+    } else if (modeloEscolhido === "Camiseta") {
+        modeloEscolhido = "top-tank";
+    }
+}
+
+function translateGola() {
+    if (golaEscolhida === "Gola V") {
+        golaEscolhida = "v-neck";
+    } else if(golaEscolhida === "Gola Redonda"){
+        golaEscolhida = "round";
+    } else if(golaEscolhida === "Gola Polo"){
+        golaEscolhida = "polo";
+    }
+}
+
+function translateTecido(){
+    if (tecidoEscolhido === "Seda") {
+        tecidoEscolhido = "silk";
+    } else if(tecidoEscolhido === "Algodão"){
+        tecidoEscolhido = "cotton";
+    } else if(tecidoEscolhido === "Poliester"){
+        tecidoEscolhido = "polyester";
+    }
+}
+
+function verificarPedido() {
     let botaoConfirmar = document.querySelector(".btn-confirmar-pedido");
     console.log("verificando...")
-    if(verificaModelo && verificaGola && verificaTecido && validaURL()){
+    if (verificaModelo && verificaGola && verificaTecido && validaURL()) {
         botaoConfirmar.classList.add("btn-selecionado");
         botaoConfirmar.removeAttribute("disabled");
     } else {
@@ -93,7 +123,30 @@ function validaURL() {
     return regularExpression.test(url);
 }
 
-function confirmarEncomenda(){
+function confirmarEncomenda() {
+    translateModelo();
+    translateGola();
+    translateTecido();
+    let encomenda = {
+        "model": modeloEscolhido,
+        "neck": golaEscolhida,
+        "material": tecidoEscolhido,
+        "image": url,
+        "owner": nome,
+        "author": nome
+    }
+    console.log(encomenda);
 
-    const promise = axios.post(urlAPI)
+    const promise = axios.post(urlAPI, encomenda);
+
+    promise.catch(tratarFalhaFazerPedido);
+    promise.then(tratarSucessoFazerPedido);
+}
+
+function tratarSucessoFazerPedido() {
+    alert("Sua encomenda foi confirmada!");
+}
+
+function tratarFalhaFazerPedido() {
+    alert("Ops, não conseguimos processar sua encomenda");
 }
