@@ -105,6 +105,14 @@ main h2 {
     margin-top: 24px;
 }
 
+.btn-selecionado{
+    background-color: #404EED;
+}
+
+.btn-selecionado:hover{
+    cursor: pointer;
+}
+
 /*estilização da seção de blusas criadas*/
 .blusas{
     display: flex;

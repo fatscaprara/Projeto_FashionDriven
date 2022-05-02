@@ -28,22 +28,22 @@
                     <div class="secao-escolher-modelo">
                         <h2>Escolha o modelo</h2>
                         <div class="itens">
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarModelo(this)">
+                            <div class="item" onclick="selecionarModelo(this)">
+                                <div class="container-imagem-div" >
                                     <img src="images/tshirt.png" alt="T-shirt">
                                 </div>
                                 
                                 <h3>T-shirt</h3>
                             </div>
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarModelo(this)">
+                            <div class="item" onclick="selecionarModelo(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/Camiseta.png" alt="Camiseta">
                                 </div>
                                 
                                 <h3>Camiseta</h3>
                             </div>
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarModelo(this)">
+                            <div class="item" onclick="selecionarModelo(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/Mangalonga.png" alt="Manga longa">
                                 </div>
                                 
@@ -55,22 +55,22 @@
                     <div class="secao-escolher-gola">
                         <h2>Escolha a gola</h2>
                         <div class="itens">
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarGola(this)">
+                            <div class="item" onclick="selecionarGola(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/GolaV.png" alt="Gola V">
                                 </div>
                                 
                                 <h3>Gola V</h3>
                             </div>
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarGola(this)">
+                            <div class="item" onclick="selecionarGola(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/GolaRedonda.png" alt="Gola Redonda">
                                 </div>
                                 
                                 <h3>Gola Redonda</h3>
                             </div>
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarGola(this)">
+                            <div class="item" onclick="selecionarGola(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/GolaPolo.png" alt="Gola Polo">
                                 </div>
                                 
@@ -82,22 +82,22 @@
                     <div class="secao-escolher-tecido">
                         <h2>Escolha o tecido</h2>
                         <div class="itens">
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarTecido(this)">
+                            <div class="item" onclick="selecionarTecido(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/Seda.png" alt="Seda">
                                 </div>
                                 
                                 <h3>Seda</h3>
                             </div>
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarTecido(this)">
+                            <div class="item" onclick="selecionarTecido(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/Algodão.png" alt="Algodão">
                                 </div>
                                 
                                 <h3>Algodão</h3>
                             </div>
-                            <div class="item">
-                                <div class="container-imagem-div" onclick="selecionarTecido(this)">
+                            <div class="item" onclick="selecionarTecido(this)">
+                                <div class="container-imagem-div">
                                     <img src="images/Poliester.png" alt="Poliester">
                                 </div>
                                 
@@ -106,19 +106,19 @@
                         </div>
                     </div>
                 </div>
-                <form class="secao-imagem-referencia">
+                <div class="secao-imagem-referencia">
                     <h2>Imagem de referência</h2>
-                    <input type="url" name="" id="" placeholder="Insira o link" class="input-imagem-referencia" required> 
-                    <button class="btn-confirmar-pedido" disabled>Confirmar pedido</button>
-                </form>
+                    <input type="url" name="" id="" placeholder="Insira o link" class="input-imagem-referencia" oninput="verificarPedido()">
+                    <div class="container-btn">
+                        <button class="btn-confirmar-pedido" onclick="confirmarEncomenda()">Confirmar pedido</button>
+                    </div>
+                </div>
             </div>
             
 
             <div class="ilustracao">
                 <img src="images/ilustração.png" alt="Ilustração">
-            </div>
-
-            
+            </div>            
         </main>
 
         <footer>
@@ -177,6 +177,7 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts/script.js">
     </script>
 </body>
