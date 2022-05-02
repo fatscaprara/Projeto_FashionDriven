@@ -8,6 +8,8 @@ let modeloEscolhido;
 let golaEscolhida;
 let tecidoEscolhido;
 
+let encomendasRecentes;
+
 let nome = prompt("Qual é o seu nome?");
 
 function selecionarModelo(modeloClicado) {
@@ -86,19 +88,19 @@ function translateModelo() {
 function translateGola() {
     if (golaEscolhida === "Gola V") {
         golaEscolhida = "v-neck";
-    } else if(golaEscolhida === "Gola Redonda"){
+    } else if (golaEscolhida === "Gola Redonda") {
         golaEscolhida = "round";
-    } else if(golaEscolhida === "Gola Polo"){
+    } else if (golaEscolhida === "Gola Polo") {
         golaEscolhida = "polo";
     }
 }
 
-function translateTecido(){
+function translateTecido() {
     if (tecidoEscolhido === "Seda") {
         tecidoEscolhido = "silk";
-    } else if(tecidoEscolhido === "Algodão"){
+    } else if (tecidoEscolhido === "Algodão") {
         tecidoEscolhido = "cotton";
-    } else if(tecidoEscolhido === "Poliester"){
+    } else if (tecidoEscolhido === "Poliester") {
         tecidoEscolhido = "polyester";
     }
 }
@@ -145,14 +147,14 @@ function confirmarEncomenda() {
 
 function tratarSucessoFazerPedido() {
     alert("Sua encomenda foi confirmada!");
-    window.location.reload();
+    mostrarEncomendasRecentes();
 }
 
 function tratarFalhaFazerPedido() {
     alert("Ops, não conseguimos processar sua encomenda");
 }
 
-function mostrarEncomendasRecentes(){
+function mostrarEncomendasRecentes() {
     const promise = axios.get(urlAPI);
 
     promise.catch(tratarFalhaEncomendasRecentes);
@@ -161,20 +163,49 @@ function mostrarEncomendasRecentes(){
 
 mostrarEncomendasRecentes();
 
-function tratarSucessoEncomendasRecentes(response){
-    let encomendasRecentes = response.data;
+function tratarSucessoEncomendasRecentes(response) {
+    encomendasRecentes = response.data;
     console.log(encomendasRecentes);
 
-    for(let i = 0; i < encomendasRecentes.length; i++){
+    document.querySelector(".blusas").innerHTML = '';
+
+    for (let i = 0; i < encomendasRecentes.length; i++) {
         document.querySelector(".blusas").innerHTML += `
                 <div class="blusa">
-                    <img src="${encomendasRecentes[i].image}" alt="Imagem de uma blusa" class="img-blusa">
+                    <img src="${encomendasRecentes[i].image}" alt="Imagem de uma blusa" class="img-blusa" onclick="encomendarBlusasPorClique(this)">
                     <h3><strong>Criador: </strong>${encomendasRecentes[i].owner}</h3>
                 </div>
         `
     }
 }
 
-function tratarFalhaEncomendasRecentes(){
+function tratarFalhaEncomendasRecentes() {
     console.log("deu falha aqui")
+}
+
+function encomendarBlusasPorClique(blusaClicada) {
+    let resposta = confirm("Tem certeza que deseja realizar essa encomenda?");
+    console.log(resposta)
+    if (resposta === true) {
+        let src = blusaClicada.getAttribute("src");
+        console.log(src);
+        let elementoBuscado = encomendasRecentes.find(receptor => receptor.image === src);
+        console.log(elementoBuscado);
+
+        let encomenda = {
+            "model": elementoBuscado.model,
+            "neck": elementoBuscado.neck,
+            "material": elementoBuscado.material,
+            "image": elementoBuscado.image,
+            "owner": nome,
+            "author": elementoBuscado.owner
+        }
+
+        console.log(encomenda);
+
+        const promise = axios.post(urlAPI, encomenda);
+
+        promise.catch(tratarFalhaFazerPedido);
+        promise.then(tratarSucessoFazerPedido);
+    }
 }
