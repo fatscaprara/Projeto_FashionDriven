@@ -145,8 +145,36 @@ function confirmarEncomenda() {
 
 function tratarSucessoFazerPedido() {
     alert("Sua encomenda foi confirmada!");
+    window.location.reload();
 }
 
 function tratarFalhaFazerPedido() {
     alert("Ops, não conseguimos processar sua encomenda");
+}
+
+function mostrarEncomendasRecentes(){
+    const promise = axios.get(urlAPI);
+
+    promise.catch(tratarFalhaEncomendasRecentes);
+    promise.then(tratarSucessoEncomendasRecentes);
+}
+
+mostrarEncomendasRecentes();
+
+function tratarSucessoEncomendasRecentes(response){
+    let encomendasRecentes = response.data;
+    console.log(encomendasRecentes);
+
+    for(let i = 0; i < encomendasRecentes.length; i++){
+        document.querySelector(".blusas").innerHTML += `
+                <div class="blusa">
+                    <img src="${encomendasRecentes[i].image}" alt="Imagem de uma blusa" class="img-blusa">
+                    <h3><strong>Criador: </strong>${encomendasRecentes[i].owner}</h3>
+                </div>
+        `
+    }
+}
+
+function tratarFalhaEncomendasRecentes(){
+    console.log("deu falha aqui")
 }

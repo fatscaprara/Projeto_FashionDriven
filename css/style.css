@@ -156,3 +156,8 @@ footer h3{
 .selecionado{
     border: solid 3px #404EED;
 }
+
+.img-blusa{
+    width: 180px;
+    height: 180px;
+}
