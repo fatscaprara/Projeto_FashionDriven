@@ -16,37 +16,33 @@
 </head>
 
 <body>
-
-    <div class="container">
         <header>
             <img src="images/Logo.png" alt="Logo da Fashion Driven">
         </header>
 
         <main>
             <div class="container-montar-roupa">
-                <div class="secoes">
                     <div class="secao-escolher-modelo">
                         <h2>Escolha o modelo</h2>
                         <div class="itens">
-                            <div class="item" onclick="selecionarModelo(this)">
+                            <div class="item" onclick="selecionarModelo(this)" name="t-shirt">
                                 <div class="container-imagem-div" >
                                     <img src="images/tshirt.png" alt="T-shirt">
                                 </div>
-                                
                                 <h3>T-shirt</h3>
                             </div>
-                            <div class="item" onclick="selecionarModelo(this)">
+
+                            <div class="item" onclick="selecionarModelo(this)" name="top-tank">
                                 <div class="container-imagem-div">
                                     <img src="images/Camiseta.png" alt="Camiseta">
                                 </div>
-                                
                                 <h3>Camiseta</h3>
                             </div>
-                            <div class="item" onclick="selecionarModelo(this)">
+
+                            <div class="item" onclick="selecionarModelo(this)" name="long">
                                 <div class="container-imagem-div">
                                     <img src="images/Mangalonga.png" alt="Manga longa">
                                 </div>
-                                
                                 <h3>Manga longa</h3>
                             </div>
                         </div>
@@ -55,25 +51,24 @@
                     <div class="secao-escolher-gola">
                         <h2>Escolha a gola</h2>
                         <div class="itens">
-                            <div class="item" onclick="selecionarGola(this)">
+                            <div class="item" onclick="selecionarGola(this)" name="v-neck">
                                 <div class="container-imagem-div">
                                     <img src="images/GolaV.png" alt="Gola V">
                                 </div>
-                                
                                 <h3>Gola V</h3>
                             </div>
-                            <div class="item" onclick="selecionarGola(this)">
+
+                            <div class="item" onclick="selecionarGola(this)" name="round">
                                 <div class="container-imagem-div">
                                     <img src="images/GolaRedonda.png" alt="Gola Redonda">
                                 </div>
-                                
                                 <h3>Gola Redonda</h3>
                             </div>
-                            <div class="item" onclick="selecionarGola(this)">
+
+                            <div class="item" onclick="selecionarGola(this)" name="polo">
                                 <div class="container-imagem-div">
                                     <img src="images/GolaPolo.png" alt="Gola Polo">
                                 </div>
-                                
                                 <h3>Gola Polo</h3>
                             </div>
                         </div>
@@ -82,33 +77,32 @@
                     <div class="secao-escolher-tecido">
                         <h2>Escolha o tecido</h2>
                         <div class="itens">
-                            <div class="item" onclick="selecionarTecido(this)">
+                            <div class="item" onclick="selecionarTecido(this)" name="silk">
                                 <div class="container-imagem-div">
                                     <img src="images/Seda.png" alt="Seda">
                                 </div>
-                                
                                 <h3>Seda</h3>
                             </div>
-                            <div class="item" onclick="selecionarTecido(this)">
+
+                            <div class="item" onclick="selecionarTecido(this)" name="cotton">
                                 <div class="container-imagem-div">
                                     <img src="images/Algodão.png" alt="Algodão">
                                 </div>
-                                
                                 <h3>Algodão</h3>
                             </div>
-                            <div class="item" onclick="selecionarTecido(this)">
+
+                            <div class="item" onclick="selecionarTecido(this)" name="polyester">
                                 <div class="container-imagem-div">
                                     <img src="images/Poliester.png" alt="Poliester">
                                 </div>
-                                
                                 <h3>Poliester</h3>
                             </div>
                         </div>
                     </div>
-                </div>
+
                 <div class="secao-imagem-referencia">
                     <h2>Imagem de referência</h2>
-                    <input type="url" name="" id="" placeholder="Insira o link" class="input-imagem-referencia" oninput="verificarPedido()">
+                    <input type="url" placeholder="Insira o link" class="input-imagem-referencia" oninput="verificarPedido()">
                     <div class="container-btn">
                         <button class="btn-confirmar-pedido" onclick="confirmarEncomenda()">Confirmar pedido</button>
                     </div>
@@ -126,7 +120,6 @@
             <div class="blusas">
             </div>
         </footer>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts/script.js">

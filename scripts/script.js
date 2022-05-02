@@ -1,13 +1,12 @@
 let verificaModelo;
 let verificaGola;
 let verificaTecido;
-let url;
+let urlImage;
 let idInterval;
 let urlAPI = "https://mock-api.driven.com.br/api/v4/shirts-api/shirts";
 let modeloEscolhido;
 let golaEscolhida;
 let tecidoEscolhido;
-
 let encomendasRecentes;
 
 let nome = prompt("Qual é o seu nome?");
@@ -29,8 +28,10 @@ function selecionarModelo(modeloClicado) {
         verificaModelo = false;
     }
 
-    modeloEscolhido = modeloClicado.querySelector("h3").innerHTML;
+    modeloEscolhido = modeloClicado.getAttribute("name");
     console.log(modeloEscolhido);
+
+    verificarPedido();
 }
 
 function selecionarGola(golaClicada) {
@@ -50,8 +51,10 @@ function selecionarGola(golaClicada) {
         verificaGola = false;
     }
 
-    golaEscolhida = golaClicada.querySelector("h3").innerHTML;
+    golaEscolhida = golaClicada.getAttribute("name");
     console.log(golaEscolhida);
+
+    verificarPedido();
 }
 
 function selecionarTecido(tecidoClicado) {
@@ -71,43 +74,15 @@ function selecionarTecido(tecidoClicado) {
         verificaTecido = false;
     }
 
-    tecidoEscolhido = tecidoClicado.querySelector("h3").innerHTML;
+    tecidoEscolhido = tecidoClicado.getAttribute("name");
     console.log(tecidoEscolhido);
-}
 
-function translateModelo() {
-    if (modeloEscolhido === "T-shirt") {
-        modeloEscolhido = "t-shirt";
-    } else if (modeloEscolhido === "Manga longa") {
-        modeloEscolhido = "long";
-    } else if (modeloEscolhido === "Camiseta") {
-        modeloEscolhido = "top-tank";
-    }
-}
-
-function translateGola() {
-    if (golaEscolhida === "Gola V") {
-        golaEscolhida = "v-neck";
-    } else if (golaEscolhida === "Gola Redonda") {
-        golaEscolhida = "round";
-    } else if (golaEscolhida === "Gola Polo") {
-        golaEscolhida = "polo";
-    }
-}
-
-function translateTecido() {
-    if (tecidoEscolhido === "Seda") {
-        tecidoEscolhido = "silk";
-    } else if (tecidoEscolhido === "Algodão") {
-        tecidoEscolhido = "cotton";
-    } else if (tecidoEscolhido === "Poliester") {
-        tecidoEscolhido = "polyester";
-    }
+    verificarPedido();
 }
 
 function verificarPedido() {
     let botaoConfirmar = document.querySelector(".btn-confirmar-pedido");
-    console.log("verificando...")
+    console.log("verificando...");
     if (verificaModelo && verificaGola && verificaTecido && validaURL()) {
         botaoConfirmar.classList.add("btn-selecionado");
         botaoConfirmar.removeAttribute("disabled");
@@ -121,19 +96,16 @@ function verificarPedido() {
 
 function validaURL() {
     const regularExpression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
-    url = document.querySelector(".input-imagem-referencia").value;
-    return regularExpression.test(url);
+    urlImage = document.querySelector(".input-imagem-referencia").value;
+    return regularExpression.test(urlImage);
 }
 
 function confirmarEncomenda() {
-    translateModelo();
-    translateGola();
-    translateTecido();
     let encomenda = {
         "model": modeloEscolhido,
         "neck": golaEscolhida,
         "material": tecidoEscolhido,
-        "image": url,
+        "image": urlImage,
         "owner": nome,
         "author": nome
     }
@@ -161,8 +133,6 @@ function mostrarEncomendasRecentes() {
     promise.then(tratarSucessoEncomendasRecentes);
 }
 
-mostrarEncomendasRecentes();
-
 function tratarSucessoEncomendasRecentes(response) {
     encomendasRecentes = response.data;
     console.log(encomendasRecentes);
@@ -180,12 +150,12 @@ function tratarSucessoEncomendasRecentes(response) {
 }
 
 function tratarFalhaEncomendasRecentes() {
-    console.log("deu falha aqui")
+    console.log("deu falha aqui");
 }
 
 function encomendarBlusasPorClique(blusaClicada) {
     let resposta = confirm("Tem certeza que deseja realizar essa encomenda?");
-    console.log(resposta)
+    console.log(resposta);
     if (resposta === true) {
         let src = blusaClicada.getAttribute("src");
         console.log(src);
@@ -209,3 +179,5 @@ function encomendarBlusasPorClique(blusaClicada) {
         promise.then(tratarSucessoFazerPedido);
     }
 }
+
+mostrarEncomendasRecentes();

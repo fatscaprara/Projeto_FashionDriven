@@ -87,6 +87,7 @@ main h2 {
     font-family: Roboto;
     margin-top: 15px;
     font-size: 14px;
+    width: 100%;
 }
 
 .input-imagem-referencia:focus{
